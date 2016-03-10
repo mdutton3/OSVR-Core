@@ -203,6 +203,7 @@ target_link_libraries(${LIBNAME_FULL}
     PRIVATE
     JsonCpp::JsonCpp
     vendored-vrpn
+    spdlog
     eigen-headers
     osvr_cxx11_flags
     ${OSVR_CODECVT_LIBRARIES})

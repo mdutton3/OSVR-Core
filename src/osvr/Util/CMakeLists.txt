@@ -72,6 +72,10 @@ set(API
     "${HEADER_LOCATION}/ImagingReportTypesC.h"
     "${HEADER_LOCATION}/IndentingStream.h"
     "${HEADER_LOCATION}/KeyedOwnershipContainer.h"
+    "${HEADER_LOCATION}/LineLogger.h"
+    "${HEADER_LOCATION}/Logger.h"
+    "${HEADER_LOCATION}/Log.h"
+    "${HEADER_LOCATION}/LogLevel.h"
     "${HEADER_LOCATION}/MatrixConventionsC.h"
     "${HEADER_LOCATION}/MatrixConventions.h"
     "${HEADER_LOCATION}/MatrixEigenAssign.h"
@@ -128,6 +132,9 @@ set(SOURCE
     Deletable.cpp
     GuardInterface.cpp
     TimeValueC.cpp
+    LineLogger.cpp
+    Log.cpp
+    Logger.cpp
     MatrixConventionsC.cpp
     MessageKeys.cpp
     PlatformConfig.h.in
@@ -164,6 +171,7 @@ target_link_libraries(${LIBNAME_FULL}
     PRIVATE
     vendored-vrpn
     eigen-headers
+    spdlog
     osvrTypePack)
 
 if(NOT OSVR_HAVE_STDALIGN)
