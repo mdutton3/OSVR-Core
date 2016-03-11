@@ -34,8 +34,9 @@
 // - none
 
 // Standard includes
-#include <string>
-#include <memory>
+#include <string>           // for std::string
+#include <memory>           // for std::shared_ptr
+#include <vector>           // for std::vector
 
 // Forward declarations
 
@@ -74,6 +75,15 @@ public:
     template <typename... Args> detail::LineLogger alert(const char* fmt,    Args&&... args);
     template <typename... Args> detail::LineLogger emerg(const char* fmt,    Args&&... args);
 
+    detail::LineLogger trace(const char* fmt);
+    detail::LineLogger debug(const char* fmt);
+    detail::LineLogger info(const char* fmt);
+    detail::LineLogger notice(const char* fmt);
+    detail::LineLogger warn(const char* fmt);
+    detail::LineLogger error(const char* fmt);
+    detail::LineLogger critical(const char* fmt);
+    detail::LineLogger alert(const char* fmt);
+    detail::LineLogger emerg(const char* fmt);
 
     // logger.info(msg) << ".." call style
     template <typename T> detail::LineLogger trace(T&& msg);
@@ -117,24 +127,6 @@ public:
 
 protected:
     std::shared_ptr<spdlog::logger> logger_;
-
-    /*
-    virtual void _log_msg(detail::log_msg&);
-    virtual void _set_pattern(const std::string&);
-    virtual void _set_formatter(formatter_ptr);
-    detail::line_logger _log_if_enabled(level::level_enum lvl);
-    template <typename... Args>
-    detail::line_logger _log_if_enabled(level::level_enum lvl, const char* fmt, const Args&... args);
-    template<typename T>
-    inline detail::line_logger _log_if_enabled(level::level_enum lvl, const T& msg);
-
-
-    friend detail::line_logger;
-    std::string _name;
-    std::vector<sink_ptr> _sinks;
-    formatter_ptr _formatter;
-    std::atomic_int _level;
-    */
 };
 
 } // end namespace log

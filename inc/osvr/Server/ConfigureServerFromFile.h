@@ -105,7 +105,6 @@ namespace server {
                 for (auto const &plugin : srvConfig.getSuccessfulPlugins()) {
                     log->info() << " - " << plugin;
                 }
-                log->info() << "\n";
             }
             if (!srvConfig.getFailedPlugins().empty()) {
                 log->warn() << "Failed to load the following plugins:";
@@ -113,10 +112,7 @@ namespace server {
                     log->warn() << " - " << pluginError.first << "\t"
                         << pluginError.second;
                 }
-                log->warn() << "\n";
             }
-
-            log->info() << "\n";
         }
 
         {
@@ -128,16 +124,13 @@ namespace server {
                      srvConfig.getSuccessfulInstantiations()) {
                     log->info() << " - " << driver;
                 }
-                log->info() << "\n";
             }
             if (!srvConfig.getFailedInstantiations().empty()) {
                 log->error() << "Errors:";
                 for (auto const &error : srvConfig.getFailedInstantiations()) {
                     log->error() << " - " << error.first << "\t" << error.second;
                 }
-                log->error() << "\n";
             }
-            log->info() << "\n";
         }
 
         if (srvConfig.processExternalDevices()) {

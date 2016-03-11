@@ -40,6 +40,8 @@ static osvr::server::ServerPtr server;
 
 /// @brief Shutdown handler function - forcing the server pointer to be global.
 void handleShutdown() {
+    auto log = ::osvr::util::log::make_logger("OSVR Server");
+    log->info() << "Received shutdown signal...";
     server->signalStop();
 }
 

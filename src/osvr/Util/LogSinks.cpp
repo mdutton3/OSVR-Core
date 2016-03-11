@@ -1,5 +1,5 @@
 /** @file
-    @brief Header
+    @brief Implementation of logging sinks for std::cout and std::cerr.
 
     @date 2016
 
@@ -23,43 +23,34 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef INCLUDED_Log_h_GUID_B6053E2B_593D_4ECA_8C3B_2C55D0FE6A49
-#define INCLUDED_Log_h_GUID_B6053E2B_593D_4ECA_8C3B_2C55D0FE6A49
-
 // Internal Includes
-#include <osvr/Util/LogLevel.h>
-#include <osvr/Util/LineLogger.h>
-#include <osvr/Util/Logger.h>
+#include <osvr/Util/LogSinks.h>
 
 // Library/third-party includes
-// - none
+#include <spdlog/spdlog.h>
 
 // Standard includes
-#include <vector>
-#include <memory>
-#include <string>
+#include <iostream>
 
 namespace osvr {
 namespace util {
 namespace log {
 
-std::shared_ptr<Logger> make_logger(const std::string& logger_name);
+/*
+template <typename Mutex>
+stdout_sink<Mutex>::stdout_sink() : ::spdlog::sinks::ostream_sink<Mutex>(std::cout, true)
+{
+    // do nothing
+}
+
+template <typename Mutex>
+stderr_sink<Mutex>::stderr_sink() : ::spdlog::sinks::ostream_sink<Mutex>(std::cerr, true)
+{
+    // do nothing
+}
+*/
 
 } // end namespace log
 } // end namespace util
 } // end namespace osvr
-
-#ifdef OSVR_TRACE_ON
-#define OSVR_TRACE(...) ::osvr::util::log::make_logger("OSVR")->trace() << __FILE__ << ":" << __LINE__ << ": " << __VA_ARGS__;
-#else
-#define OSVR_TRACE(...)
-#endif
-
-#ifdef OSVR_DEBUG_ON
-#define OSVR_DEBUG(...) ::osvr::util::log::make_logger("OSVR")->debug() << __FILE__ << ":" << __LINE__ << ": " << __VA_ARGS__;
-#else
-#define OSVR_DEBUG(...)
-#endif
-
-#endif // INCLUDED_Log_h_GUID_B6053E2B_593D_4ECA_8C3B_2C55D0FE6A49
 

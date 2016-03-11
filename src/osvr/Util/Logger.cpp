@@ -30,7 +30,9 @@
 #include <spdlog/spdlog.h>
 
 // Standard includes
-// - none
+#include <memory>           // for std::shared_ptr
+#include <utility>          // for std::forward
+#include <string>           // for std::string
 
 namespace osvr {
 namespace util {
@@ -74,6 +76,7 @@ void Logger::setLogLevel(LogLevel level)
 }
 
 // Logger.info(cppformat_string, arg1, arg2, arg3, ...) call style
+/*
 template <typename... Args> detail::LineLogger Logger::trace(const char* fmt, Args&&... args)
 {
     return logger_->trace(fmt, std::forward<Args>(args)...);
@@ -118,7 +121,52 @@ template <typename... Args> detail::LineLogger Logger::emerg(const char* fmt, Ar
 {
     return logger_->emerg(fmt, std::forward<Args>(args)...);
 }
+*/
 
+detail::LineLogger Logger::trace(const char* fmt)
+{
+    return logger_->trace(fmt);
+}
+
+detail::LineLogger Logger::debug(const char* fmt)
+{
+    return logger_->debug(fmt);
+}
+
+detail::LineLogger Logger::info(const char* fmt)
+{
+    return logger_->info(fmt);
+}
+
+detail::LineLogger Logger::notice(const char* fmt)
+{
+    return logger_->notice(fmt);
+}
+
+detail::LineLogger Logger::warn(const char* fmt)
+{
+    return logger_->warn(fmt);
+}
+
+detail::LineLogger Logger::error(const char* fmt)
+{
+    return logger_->error(fmt);
+}
+
+detail::LineLogger Logger::critical(const char* fmt)
+{
+    return logger_->critical(fmt);
+}
+
+detail::LineLogger Logger::alert(const char* fmt)
+{
+    return logger_->alert(fmt);
+}
+
+detail::LineLogger Logger::emerg(const char* fmt)
+{
+    return logger_->emerg(fmt);
+}
 
 // logger.info(msg) << ".." call style
 template <typename T> detail::LineLogger Logger::trace(T&& msg)

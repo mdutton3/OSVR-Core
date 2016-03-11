@@ -33,7 +33,8 @@
 // - none
 
 // Standard includes
-#include <memory>
+#include <memory>       // for std::unique_ptr
+#include <string>       // for std::string
 
 // Forward declaration
 namespace spdlog {
@@ -109,9 +110,7 @@ public:
     bool is_enabled() const;
 
 private:
-    //Logger* logger_;
-    //std::unique_ptr<spdlog::details::line_logger> lineLogger_;
-    spdlog::details::line_logger&& lineLogger_;
+    std::unique_ptr<spdlog::details::line_logger> lineLogger_;
 };
 
 } // end namespace detail

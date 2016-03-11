@@ -25,12 +25,14 @@
 
 // Internal Includes
 #include <osvr/Util/Log.h>
+#include <osvr/Util/LogSinks.h>
 
 // Library/third-party includes
 #include <spdlog/spdlog.h>
 
 // Standard includes
-// - none
+#include <memory>           // for std::make_shared, std::shared_ptr
+#include <string>           // for std::string
 
 namespace osvr {
 namespace util {
@@ -40,7 +42,8 @@ std::shared_ptr<Logger> make_logger(const std::string& logger_name)
 {
     // FIXME use custom OSVR sink that splits output to STDOUT and STDERR and
     // log files based on severity levels, etc.
-    auto spd_logger = ::spdlog::details::registry::instance().create(logger_name, spdlog::sinks::stdout_sink_mt::instance());
+    auto sink = std::make_shared<stdout_sink_mt>();
+    auto spd_logger = std::make_shared<::spdlog::logger>(logger_name, sink);
     return std::make_shared<Logger>(spd_logger);
 }
 

@@ -30,14 +30,16 @@
 #include <spdlog/spdlog.h>
 
 // Standard includes
-// - none
+#include <algorithm>        // for std::move
+#include <utility>          // for std::forward
+#include <string>           // for std::string
 
 namespace osvr {
 namespace util {
 namespace log {
 namespace detail {
 
-LineLogger::LineLogger(spdlog::details::line_logger&& line_logger) : lineLogger_(std::move(line_logger))
+LineLogger::LineLogger(spdlog::details::line_logger&& line_logger) : lineLogger_(new ::spdlog::details::line_logger(std::move(line_logger)))
 {
     // do nothing
 }
@@ -49,102 +51,102 @@ LineLogger::~LineLogger()
 
 void LineLogger::write(const char* what)
 {
-    lineLogger_.write(what);
+    lineLogger_->write(what);
 }
 
 template <typename... Args>
 void LineLogger::write(const char* fmt, Args&&... args)
 {
-    lineLogger_.write(fmt, std::forward<Args>(args)...);
+    lineLogger_->write(fmt, std::forward<Args>(args)...);
 }
 
 LineLogger& LineLogger::operator<<(const char* what)
 {
-    lineLogger_ << what;
+    lineLogger_->operator<<(what);
     return *this;
 }
 
 LineLogger& LineLogger::operator<<(const std::string& what)
 {
-    lineLogger_ << what;
+    lineLogger_->operator<<(what);
     return *this;
 }
 
 LineLogger& LineLogger::operator<<(int what)
 {
-    lineLogger_ << what;
+    lineLogger_->operator<<(what);
     return *this;
 }
 
 LineLogger& LineLogger::operator<<(unsigned int what)
 {
-    lineLogger_ << what;
+    lineLogger_->operator<<(what);
     return *this;
 }
 
 LineLogger& LineLogger::operator<<(long what)
 {
-    lineLogger_ << what;
+    lineLogger_->operator<<(what);
     return *this;
 }
 
 LineLogger& LineLogger::operator<<(unsigned long what)
 {
-    lineLogger_ << what;
+    lineLogger_->operator<<(what);
     return *this;
 }
 
 LineLogger& LineLogger::operator<<(long long what)
 {
-    lineLogger_ << what;
+    lineLogger_->operator<<(what);
     return *this;
 }
 
 LineLogger& LineLogger::operator<<(unsigned long long what)
 {
-    lineLogger_ << what;
+    lineLogger_->operator<<(what);
     return *this;
 }
 
 LineLogger& LineLogger::operator<<(double what)
 {
-    lineLogger_ << what;
+    lineLogger_->operator<<(what);
     return *this;
 }
 
 LineLogger& LineLogger::operator<<(long double what)
 {
-    lineLogger_ << what;
+    lineLogger_->operator<<(what);
     return *this;
 }
 
 LineLogger& LineLogger::operator<<(float what)
 {
-    lineLogger_ << what;
+    lineLogger_->operator<<(what);
     return *this;
 }
 
 LineLogger& LineLogger::operator<<(char what)
 {
-    lineLogger_ << what;
+    lineLogger_->operator<<(what);
     return *this;
 }
 
 template<typename T>
 LineLogger& LineLogger::operator<<(T&& what)
 {
-    lineLogger_.operator<<(std::forward<T>(what));
+    lineLogger_->operator<<(std::forward<T>(what));
     return *this;
 }
 
 void LineLogger::disable()
 {
-    lineLogger_.disable();
+    lineLogger_->disable();
 }
 
 bool LineLogger::is_enabled() const
 {
-    return lineLogger_.is_enabled();
+    return lineLogger_->is_enabled();
 }
 
 } // end namespace detail
