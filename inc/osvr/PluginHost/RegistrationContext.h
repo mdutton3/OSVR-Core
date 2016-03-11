@@ -31,6 +31,7 @@
 #include <osvr/Util/SharedPtr.h>
 #include <osvr/Util/UniquePtr.h>
 #include <osvr/Util/AnyMap.h>
+#include <osvr/Util/Log.h>
 #include <osvr/PluginHost/Export.h>
 #include <osvr/PluginHost/PluginSpecificRegistrationContext.h>
 
@@ -99,6 +100,7 @@ namespace pluginhost {
 
         PluginRegMap m_regMap;
         util::AnyMap m_data;
+        util::log::LoggerPtr m_log;
         struct Impl;
         /// Private impl.
         unique_ptr<Impl> m_impl;

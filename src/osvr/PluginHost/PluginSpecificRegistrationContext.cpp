@@ -25,6 +25,7 @@
 // Internal Includes
 #include <osvr/PluginHost/PluginSpecificRegistrationContext.h>
 #include "PluginSpecificRegistrationContextImpl.h"
+#include <osvr/Util/Log.h>
 
 // Library/third-party includes
 // - none
@@ -60,6 +61,12 @@ namespace pluginhost {
     PluginSpecificRegistrationContext::PluginSpecificRegistrationContext(
         std::string const &name)
         : m_name(name) {}
+
+    void PluginSpecificRegistrationContext::log(util::log::LogLevel severity,
+                                                const char *message) {
+        auto logger = util::log::make_logger(m_name);
+        logger->log(severity, message);
+    }
 
 } // namespace pluginhost
 } // namespace osvr

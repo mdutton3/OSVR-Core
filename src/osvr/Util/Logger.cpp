@@ -289,6 +289,33 @@ detail::LineLogger Logger::log(LogLevel level, const char* fmt, Args&&... args)
 }
 
 // logger.log(log_level, msg) << ".." call style
+detail::LineLogger Logger::log(LogLevel level, const char* msg)
+{
+    switch (level) {
+    case LogLevel::trace:
+        return trace(msg);
+    case LogLevel::debug:
+        return debug(msg);
+    case LogLevel::info:
+        return info(msg);
+    case LogLevel::notice:
+        return notice(msg);
+    case LogLevel::warn:
+        return warn(msg);
+    case LogLevel::err:
+        return error(msg);
+    case LogLevel::critical:
+        return critical(msg);
+    case LogLevel::alert:
+        return alert(msg);
+    case LogLevel::emerg:
+        return emerg(msg);
+    }
+
+    return info(msg);
+}
+
+// logger.log(log_level, msg) << ".." call style
 template <typename T>
 detail::LineLogger Logger::log(LogLevel level, T&& msg)
 {

@@ -113,6 +113,9 @@ public:
     detail::LineLogger log(LogLevel level, const char* fmt, Args&&... args);
 
     // logger.log(log_level, msg) << ".." call style
+    detail::LineLogger log(LogLevel level, const char* msg);
+
+    // logger.log(log_level, msg) << ".." call style
     template <typename T>
     detail::LineLogger log(LogLevel level, T&& msg);
 
@@ -128,6 +131,8 @@ public:
 protected:
     std::shared_ptr<spdlog::logger> logger_;
 };
+
+typedef std::shared_ptr<Logger> LoggerPtr;
 
 } // end namespace log
 } // end namespace util

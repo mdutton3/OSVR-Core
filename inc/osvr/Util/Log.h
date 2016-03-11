@@ -43,7 +43,7 @@ namespace osvr {
 namespace util {
 namespace log {
 
-std::shared_ptr<Logger> make_logger(const std::string& logger_name);
+LoggerPtr make_logger(const std::string& logger_name);
 
 } // end namespace log
 } // end namespace util

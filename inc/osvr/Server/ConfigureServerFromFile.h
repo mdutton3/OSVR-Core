@@ -86,9 +86,9 @@ namespace server {
             srvConfig.loadConfig(config);
             ret = srvConfig.constructServer();
         } catch (std::exception &e) {
-            log->error() << "Caught exception constructing server from JSON config "
-                   "file: "
-                << e.what();
+            log->error()
+                << "Caught exception constructing server from JSON config "
+                   "file: " << e.what();
             return nullptr;
         }
 
@@ -167,4 +167,3 @@ namespace server {
 } // namespace osvr
 
 #endif // INCLUDED_ConfigureServerFromFile_h_GUID_9DA4C152_2AE4_4394_E19E_C0B7EA41804F
-

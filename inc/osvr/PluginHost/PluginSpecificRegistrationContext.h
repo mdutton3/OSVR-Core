@@ -35,6 +35,7 @@
 #include <osvr/Util/SharedPtr.h>
 #include <osvr/Util/AnyMap_fwd.h>
 #include <osvr/Util/GenericDeleter.h>
+#include <osvr/Util/LogLevel.h>
 
 // Library/third-party includes
 #include <boost/noncopyable.hpp>
@@ -130,6 +131,13 @@ namespace pluginhost {
         /// @brief Accessor for plugin name.
         OSVR_PLUGINHOST_EXPORT const std::string &getName() const;
 
+        /// @brief Log a message to the plugin-specific channel.
+        ///
+        /// @param severity The severity of the message.
+        /// @param message The message to be logged.
+        OSVR_PLUGINHOST_EXPORT void log(util::log::LogLevel severity,
+                                        const char *message);
+
       protected:
         /// @brief Constructor for derived class use only
         PluginSpecificRegistrationContext(std::string const &name);
@@ -137,6 +145,8 @@ namespace pluginhost {
       private:
         std::string const m_name;
     };
+
 } // namespace pluginhost
 } // namespace osvr
+
 #endif // INCLUDED_PluginSpecificRegistrationContext_h_GUID_8C008527_0BF6_408F_3C73_4FE76B77D856
