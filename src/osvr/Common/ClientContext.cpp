@@ -146,6 +146,12 @@ ClientContextDeleter OSVR_ClientContextObject::getDeleter() const {
 
 bool OSVR_ClientContextObject::getStatus() const { return m_getStatus(); }
 
+void OSVR_ClientContextObject::log(osvr::util::log::LogLevel severity,
+                                   const char *message) {
+    auto logger = osvr::util::log::make_logger(m_appId);
+    logger->log(severity, message);
+}
+
 bool OSVR_ClientContextObject::m_getStatus() const {
     // by default, assume we are started up.
     return true;

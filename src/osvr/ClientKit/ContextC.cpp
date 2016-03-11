@@ -29,6 +29,7 @@
 #include <osvr/Common/GetEnvironmentVariable.h>
 #include <osvr/Common/Tracing.h>
 #include <osvr/Util/Verbosity.h>
+#include <osvr/Util/Log.h>
 
 // Library/third-party includes
 // - none
@@ -69,3 +70,14 @@ OSVR_ReturnCode osvrClientShutdown(OSVR_ClientContext ctx) {
     osvr::common::deleteContext(ctx);
     return OSVR_RETURN_SUCCESS;
 }
+
+OSVR_ReturnCode osvrClientLog(OSVR_ClientContext ctx, OSVR_LogLevel severity,
+                              const char *message) {
+    if (!ctx) {
+        return OSVR_RETURN_FAILURE;
+    }
+    const auto s = static_cast<osvr::util::log::LogLevel>(severity);
+    ctx->log(s, message);
+    return OSVR_RETURN_SUCCESS;
+}
+

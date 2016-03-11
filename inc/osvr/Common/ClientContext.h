@@ -35,6 +35,7 @@
 #include <osvr/Util/KeyedOwnershipContainer.h>
 #include <osvr/Util/UniquePtr.h>
 #include <osvr/Util/SharedPtr.h>
+#include <osvr/Util/LogLevel.h>
 
 // Library/third-party includes
 #include <boost/noncopyable.hpp>
@@ -113,6 +114,10 @@ struct OSVR_ClientContextObject : boost::noncopyable {
     /// @brief Returns true if we are started up and fully connected (path tree
     /// received, etc.)
     OSVR_COMMON_EXPORT bool getStatus() const;
+
+    /// @brief Logs a message from the client.
+    OSVR_COMMON_EXPORT void log(osvr::util::log::LogLevel severity,
+                                const char *message);
 
   protected:
     /// @brief Constructor for derived class use only.
