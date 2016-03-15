@@ -36,6 +36,7 @@
 #include <osvr/Util/UniquePtr.h>
 #include <osvr/Util/SharedPtr.h>
 #include <osvr/Util/LogLevel.h>
+#include <osvr/Util/Logger.h>
 
 // Library/third-party includes
 #include <boost/noncopyable.hpp>
@@ -164,6 +165,7 @@ struct OSVR_ClientContextObject : boost::noncopyable {
 
     osvr::util::MultipleKeyedOwnershipContainer m_ownedObjects;
     osvr::common::ClientContextDeleter m_deleter;
+    osvr::util::log::LoggerPtr m_logger;
 };
 
 namespace osvr {
